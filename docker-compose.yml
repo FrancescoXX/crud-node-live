@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  node_app:
+    container_name: node_app
+    build: .
+    image: francescoxx/node_live_app
+    ports:
+      - "3000:3000"
+    environment:
+      - PG_DB=node_live_db
+      - PG_USER=francesco
+      - PG_PASSWORD=12345
+      - PG_HOST=node_db
+    depends_on:
+      - node_db
+  
+  node_db:
+    container_name: node_db
+    image: postgres:12
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=node_live_db
+      - POSTGRES_USER=francesco
+      - POSTGRES_PASSWORD=12345
+    volumes:
+      - node_db_data:/var/lib/postgresql/data
+
+volumes:
+  node_db_data: {}
+
+
+
