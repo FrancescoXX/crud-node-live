@@ -12,6 +12,7 @@ services:
       - PG_USER=francesco
       - PG_PASSWORD=12345
       - PG_HOST=node_db
+    restart: always
     depends_on:
       - node_db
   
